@@ -1,0 +1,23 @@
+Quando un host invia un pacchetto a un server situato in un’altra rete, il processo coinvolge diverse fasi e dispositivi di rete:
+
+ 1. Determinazione dell’indirizzo IP di destinazione: Prima di tutto, l’host deve determinare l’indirizzo IP del server di destinazione. Questo può essere fatto utilizzando il DNS (Domain Name System) per tradurre il nome di dominio del server nell’indirizzo IP corrispondente.
+ 2. Determinazione della rete di destinazione: L’host controlla se il server di destinazione si trova nella stessa rete locale o in un’altra rete. Per farlo, confronta l’indirizzo IP del server con il proprio indirizzo IP e la maschera di sottorete.
+ 3. Se il server è in un’altra rete: Se il server è in un’altra rete, l’host deve inviare il pacchetto al router predefinito (gateway predefinito o default gateway). Questo è il passo critico in cui il router gioca un ruolo fondamentale. L’host invia il pacchetto al router, presumibilmente con l’indirizzo IP del router come indirizzo di destinazione.
+ 4. Inoltro del pacchetto dal router: Il router riceve il pacchetto dall’host e determina la rotta migliore per raggiungere la rete di destinazione del server. Utilizza tabelle di routing per fare questa scelta. Una volta determinata la rotta, il router inoltra il pacchetto al prossimo hop, che potrebbe essere un altro router o direttamente il server di destinazione se si trova sulla stessa rete del router.
+ 5. Inoltro del pacchetto attraverso altri dispositivi di rete (se necessario): Se il pacchetto deve attraversare più router per raggiungere la destinazione finale, il processo di inoltro si ripete fino a quando il pacchetto raggiunge la sottorete del server di destinazione.
+ 6. Consegna al server di destinazione: Una volta che il pacchetto raggiunge la rete del server di destinazione, l’ultimo router o dispositivo di rete lo consegnerà al server stesso, che poi lo processerà e risponderà di conseguenza.
+
+In breve, quando un host invia un pacchetto a un server situato in un’altra rete, il pacchetto viene instradato attraverso una serie di dispositivi di rete, principalmente router, fino a raggiungere la destinazione finale.
+
+Prendendo come esempio un pacchetto che parte dal pc 1 (192.168.1.1) il percorso che segue è:
+1. Livello fisico (Layer 1): Il pacchetto viene inviato dal PC attraverso il cavo Ethernet fino allo switch della rete 1.
+
+2. Livello datalink (Layer 2): Lo switch della rete 1 riceve il pacchetto e, utilizzando l'indirizzo MAC del server, inoltra il pacchetto attraverso il collegamento con il router.
+
+3. Livello di rete (Layer 3): Il router riceve il pacchetto e lo analizza per determinare il percorso ottimale verso il server. Il router cambierà l'indirizzo MAC del mittente con il proprio e invierà il pacchetto attraverso il collegamento con lo switch della rete 2.
+
+4. Livello datalink (Layer 2): Lo switch della rete 2 riceve il pacchetto dal router e lo inoltra al server utilizzando l'indirizzo MAC del server.
+
+5. Livello fisico (Layer 1): Il pacchetto arriva al server attraverso il cavo Ethernet.
+
+In sintesi, il pacchetto attraversa il PC, lo switch della rete 1, il router, lo switch della rete 2 e infine il server.
